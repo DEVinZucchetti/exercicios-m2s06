@@ -73,4 +73,20 @@ class PessoasController extends Controller
             return $this->response($execption->getMessage(), null, false, 500);
         }
     }
+
+    public function show($id)
+    {
+        try {
+            $pessoa = Pessoa::find($id);
+
+            if(empty($pessoa)) {
+                return $this->response('Pessoa não encontrada', null, false, 404);
+            }
+
+            $message = "Pessoa ".$pessoa->name." encontrada com sucesso.";
+            return $this->response($message, $pessoa);
+        } catch (\Exception $execption) {
+            return $this->response($execption->getMessage(), null, false, 500);
+        }
+    }
 }
